@@ -18,15 +18,15 @@ A modern, responsive task management application built with React.js that helps 
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://your-deployed-app-url.com) *(Deploy link will be added after deployment)*
+[View Live Demo](https://tasktrackerbysowjanya.netlify.app/) 
 
 ## 📱 Screenshots
 
 ### Desktop View
-![Desktop Screenshot](https://via.placeholder.com/800x500/667eea/ffffff?text=Desktop+View)
+![Login Screen - Desktop](public/LoginLight.png)
 
 ### Mobile View
-![Mobile Screenshot](https://via.placeholder.com/400x600/667eea/ffffff?text=Mobile+View)
+
 
 ## 🛠️ Technologies Used
 
