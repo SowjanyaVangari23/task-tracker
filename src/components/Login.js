@@ -48,6 +48,7 @@ const Login = ({ onLogin, darkMode, onDarkModeToggle }) => {
               autoFocus
             />
             {error && <span className="error-message">{error}</span>}
+            }
           </div>
           
           <button type="submit" className="login-btn">
