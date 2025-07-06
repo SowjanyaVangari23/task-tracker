@@ -15,6 +15,11 @@ A modern, responsive task management application built with React.js that helps 
 - **Data Persistence**: All data stored locally using localStorage
 - **Responsive Design**: Optimized for both mobile and desktop devices
 - **Modern UI**: Clean, intuitive interface with smooth animations
+- **Search Tasks**: Real-time search bar to filter tasks by title
+- **Task Priority**: Assign priority levels (Low, Medium, High) to each task
+- **Due Dates**: Set and display due dates for your tasks
+- **Dark Mode**: Toggle between light and dark themes
+- **Task Categories/Tags**: Organize tasks by category (e.g., work, personal, study)
 
 ## 🚀 Live Demo
 
@@ -74,13 +79,17 @@ task-tracker/
 │   │   ├── TaskForm.js       # Add/Edit task form
 │   │   ├── TaskItem.js       # Individual task display
 │   │   ├── TaskList.js       # Task list container
-│   │   └── TaskFilter.js     # Filter buttons
+│   │   ├── TaskFilter.js     # Filter buttons 
+│   │   ├── SearchBar.js      # Search tasks using title, category, description
+│   │   └── DarkModeToggle.js # Toggle between Light and Dark themes
 │   ├── styles/
 │   │   ├── Login.css
 │   │   ├── TaskForm.css
 │   │   ├── TaskItem.css
 │   │   ├── TaskList.css
-│   │   └── TaskFilter.css
+│   │   ├── TaskFilter.css
+│   │   ├── SearchBar.css
+│   │   └── DarkModeToggle.css
 │   ├── utils/
 │   │   └── localStorage.js   # localStorage utilities
 │   ├── App.js               # Main app component
@@ -93,12 +102,12 @@ task-tracker/
 ## 🎯 Usage
 
 1. **Login**: Enter any username to access the task dashboard
-2. **Add Tasks**: Use the form at the top to create new tasks
+2. **Add Tasks**: Use the form to add title, description, priority, due date, and category
 3. **Manage Tasks**: 
-   - Click the checkbox to mark tasks complete/incomplete
-   - Click the edit button (✏️) to modify tasks
-   - Click the delete button (🗑️) to remove tasks
-4. **Filter Tasks**: Use the filter buttons to view All, Pending, or Completed tasks
+   - Click the checkbox to mark complete/incomplete
+   - Edit or delete using action buttons
+   - Search Tasks: Use the top search bar to filter tasks by title
+4. **Filter Tasks**: Use the filter buttons to view All, Pending, Completed or Overdue tasks
 5. **Logout**: Click the logout button to return to the login screen
 
 ## 🔧 Available Scripts
@@ -150,15 +159,11 @@ This app can be easily deployed to:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- GitHub: [@SowjanyaVangari23](https://github.com/SowjanyaVangari23)
+- LinkedIn: [sowjanya-vangari-61772526b](https://linkedin.com/in/sowjanya-vangari-61772526b)
 
 ## 🙏 Acknowledgments
 
