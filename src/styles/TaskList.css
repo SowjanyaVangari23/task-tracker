@@ -8,125 +8,73 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
-  background: rgba(20, 20, 20, 0.8);
-  backdrop-filter: blur(20px);
+  min-height: 300px;
+  background: white;
   border-radius: 20px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.task-list-empty::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.task-list-empty:hover::before {
-  opacity: 1;
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
 }
 
 .empty-state {
   text-align: center;
-  padding: 3rem;
-  max-width: 500px;
-  position: relative;
-  z-index: 1;
+  padding: 2rem;
+  max-width: 400px;
 }
 
 .empty-icon {
-  font-size: 5rem;
-  margin-bottom: 1.5rem;
+  font-size: 4rem;
+  margin-bottom: 1rem;
   opacity: 0.6;
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 
 .empty-state h3 {
-  color: #ffffff;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1e293b;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .empty-state p {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  font-weight: 400;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 /* Animation for task list updates */
 .task-list {
-  animation: fadeIn 0.6s ease-in;
+  animation: fadeIn 0.4s ease-in;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .task-list-empty {
-    min-height: 350px;
+    min-height: 250px;
     border-radius: 16px;
   }
   
   .empty-state {
-    padding: 2.5rem;
+    padding: 1.5rem;
   }
   
   .empty-icon {
-    font-size: 4rem;
-  }
-  
-  .empty-state h3 {
-    font-size: 1.3rem;
-  }
-  
-  .empty-state p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .task-list-empty {
-    min-height: 300px;
-    border-radius: 12px;
-  }
-  
-  .empty-state {
-    padding: 2rem;
-  }
-  
-  .empty-icon {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
   
   .empty-state h3 {
@@ -138,65 +86,53 @@
   }
 }
 
+@media (max-width: 480px) {
+  .task-list-empty {
+    min-height: 200px;
+    border-radius: 12px;
+  }
+  
+  .empty-state {
+    padding: 1rem;
+  }
+  
+  .empty-icon {
+    font-size: 2.5rem;
+  }
+  
+  .empty-state h3 {
+    font-size: 1.1rem;
+  }
+  
+  .empty-state p {
+    font-size: 0.9rem;
+  }
+}
+
 /* Loading state */
 .task-list-loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 300px;
-  background: rgba(20, 20, 20, 0.8);
-  backdrop-filter: blur(20px);
+  min-height: 200px;
+  background: white;
   border-radius: 20px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
 }
 
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-top: 4px solid #667eea;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f1f5f9;
+  border-top: 4px solid #6366f1;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Staggered animation for task items */
-.task-list .task-item:nth-child(1) { animation-delay: 0.1s; }
-.task-list .task-item:nth-child(2) { animation-delay: 0.2s; }
-.task-list .task-item:nth-child(3) { animation-delay: 0.3s; }
-.task-list .task-item:nth-child(4) { animation-delay: 0.4s; }
-.task-list .task-item:nth-child(5) { animation-delay: 0.5s; }
-
-/* Smooth transitions for filter changes */
-.task-list-container {
-  position: relative;
-}
-
-.task-list-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.task-list-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.4s ease-out;
-}
-
-.task-list-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.task-list-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: all 0.3s ease-in;
 }

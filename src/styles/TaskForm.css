@@ -1,53 +1,31 @@
 .task-form-container {
-  background: rgba(20, 20, 20, 0.8);
-  backdrop-filter: blur(20px);
+  background: white;
   border-radius: 20px;
   padding: 2rem;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   margin-bottom: 2.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.task-form-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.task-form-container:hover::before {
-  opacity: 1;
+  border: 1px solid #f1f5f9;
 }
 
 .task-form h3 {
-  color: #ffffff;
+  color: #1e293b;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, #4ecdc4, #45b7d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .task-form h3::before {
   content: "✨";
-  font-size: 1.3rem;
-  background: none;
-  -webkit-text-fill-color: initial;
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  padding: 0.5rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
 }
 
 .task-form .form-group {
@@ -56,36 +34,35 @@
 
 .task-form label {
   font-weight: 600;
-  color: #ffffff;
-  font-size: 1rem;
+  color: #374151;
+  font-size: 0.9rem;
   margin-bottom: 0.75rem;
   display: block;
 }
 
 .task-form input,
 .task-form textarea {
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 1rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
   resize: vertical;
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  backdrop-filter: blur(10px);
+  background: white;
+  color: #1f2937;
 }
 
 .task-form input::placeholder,
 .task-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: #9ca3af;
 }
 
 .task-form input:focus,
 .task-form textarea:focus {
-  border-color: #4ecdc4;
-  box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: white;
+  transform: translateY(-1px);
 }
 
 .task-form textarea {
@@ -101,27 +78,19 @@
 }
 
 .form-actions .btn {
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.75rem;
   font-weight: 700;
-  border-radius: 16px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
 }
 
 .form-actions .btn-primary {
   flex: 1;
-  background: linear-gradient(135deg, #4ecdc4, #44a08d);
-  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
-}
-
-.form-actions .btn-primary:hover {
-  background: linear-gradient(135deg, #45b7d1, #3d8b7d);
-  box-shadow: 0 12px 35px rgba(78, 205, 196, 0.4);
 }
 
 .form-actions .btn-secondary {
-  background: linear-gradient(135deg, #6c757d, #5a6268);
+  background: #64748b;
   color: white;
-  box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
 }
 
 /* Mobile responsiveness */
@@ -138,7 +107,7 @@
   
   .form-actions .btn {
     width: 100%;
-    padding: 1.1rem 2rem;
+    padding: 1rem 1.75rem;
   }
 }
 
@@ -154,51 +123,29 @@
   
   .task-form input,
   .task-form textarea {
-    padding: 0.9rem;
-    font-size: 0.95rem;
-    border-radius: 12px;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
   }
   
   .form-actions .btn {
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.9rem;
   }
 }
 
 /* Animation for form appearance */
 .task-form-container {
-  animation: slideDown 0.6s ease-out;
+  animation: slideDown 0.4s ease-out;
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-20px) scale(0.98);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
-}
-
-/* Character counter styling */
-.task-form .form-group {
-  position: relative;
-}
-
-.task-form input[maxlength]:focus + .char-counter,
-.task-form textarea[maxlength]:focus + .char-counter {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.char-counter {
-  position: absolute;
-  right: 0.75rem;
-  bottom: -1.5rem;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: all 0.3s ease;
 }
