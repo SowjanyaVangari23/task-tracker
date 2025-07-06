@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/TaskForm.css';
 
-const TaskForm = ({ onAddTask, editingTask, onUpdateTask, onCancelEdit }) => {
+const TaskForm = ({ onAddTask, editingTask, onUpdateTask, onCancelEdit, categories }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState('medium');
+  const [category, setCategory] = useState('general');
+  const [dueDate, setDueDate] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (editingTask) {
       setTitle(editingTask.title);
       setDescription(editingTask.description || '');
+      setPriority(editingTask.priority || 'medium');
+      setCategory(editingTask.category || 'general');
+      setDueDate(editingTask.dueDate ? editingTask.dueDate.split('T')[0] : '');
     } else {
       setTitle('');
       setDescription('');
+      setPriority('medium');
+      setCategory('general');
+      setDueDate('');
     }
     setError('');
   }, [editingTask]);
@@ -33,50 +42,119 @@ const TaskForm = ({ onAddTask, editingTask, onUpdateTask, onCancelEdit }) => {
     
     setError('');
     
+    const taskData = {
+      title: trimmedTitle,
+      description: description.trim(),
+      priority,
+      category: category.trim() || 'general',
+      dueDate: dueDate ? new Date(dueDate + 'T23:59:59').toISOString() : null
+    };
+    
     if (editingTask) {
       onUpdateTask({
         ...editingTask,
-        title: trimmedTitle,
-        description: description.trim()
+        ...taskData
       });
     } else {
-      onAddTask({
-        title: trimmedTitle,
-        description: description.trim()
-      });
+      onAddTask(taskData);
     }
     
     setTitle('');
     setDescription('');
+    setPriority('medium');
+    setCategory('general');
+    setDueDate('');
   };
 
   const handleCancel = () => {
     setTitle('');
     setDescription('');
+    setPriority('medium');
+    setCategory('general');
+    setDueDate('');
     setError('');
     if (onCancelEdit) {
       onCancelEdit();
     }
   };
 
+  const priorityOptions = [
+    { value: 'low', label: 'Low Priority', emoji: '🟢' },
+    { value: 'medium', label: 'Medium Priority', emoji: '🟡' },
+    { value: 'high', label: 'High Priority', emoji: '🔴' }
+  ];
+
   return (
     <div className="task-form-container">
       <form onSubmit={handleSubmit} className="task-form">
         <h3>{editingTask ? 'Edit Task' : 'Add New Task'}</h3>
         
-        <div className="form-group">
-          <label htmlFor="title">Title *</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter task title"
-            className={error ? 'error' : ''}
-            maxLength="100"
-          />
-          {error && <span className="error-message">{error}</span>}
+        <div className="form-row">
+          <div className="form-group flex-2">
+            <label htmlFor="title">Title *</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter task title"
+              className={error ? 'error' : ''}
+              maxLength="100"
+            />
+            {error && <span className="error-message">{error}</span>}
+          </div>
           
+          <div className="form-group">
+            <label htmlFor="priority">Priority</label>
+            <select
+              id="priority"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+              className="priority-select"
+            >
+              {priorityOptions.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.emoji} {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            <input
+              type="text"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="e.g., work, personal, study"
+              maxLength="30"
+              list="category-suggestions"
+            />
+            <datalist id="category-suggestions">
+              {categories.filter(cat => cat !== 'all').map(cat => (
+                <option key={cat} value={cat} />
+              ))}
+              <option value="work" />
+              <option value="personal" />
+              <option value="study" />
+              <option value="health" />
+              <option value="shopping" />
+            </datalist>
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="dueDate">Due Date</label>
+            <input
+              type="date"
+              id="dueDate"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+              min={new Date().toISOString().split('T')[0]}
+            />
+          </div>
         </div>
         
         <div className="form-group">

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import DarkModeToggle from './DarkModeToggle';
 import '../styles/Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, darkMode, onDarkModeToggle }) => {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
 
@@ -27,7 +28,10 @@ const Login = ({ onLogin }) => {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>Task Tracker</h1>
+          <div className="header-top">
+            <h1>Task Tracker</h1>
+            <DarkModeToggle darkMode={darkMode} onToggle={onDarkModeToggle} />
+          </div>
           <p>Welcome! Please enter your username to continue</p>
         </div>
         
@@ -44,7 +48,6 @@ const Login = ({ onLogin }) => {
               autoFocus
             />
             {error && <span className="error-message">{error}</span>}
-            
           </div>
           
           <button type="submit" className="login-btn">

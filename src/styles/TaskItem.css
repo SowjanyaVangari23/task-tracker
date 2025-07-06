@@ -1,12 +1,15 @@
 .task-item {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1.2rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   border-left: 4px solid transparent;
-  transition: all 0.2s ease;
-  animation: slideIn 0.3s ease-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideIn 0.4s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes slideIn {
@@ -20,18 +23,44 @@
   }
 }
 
+.task-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s;
+}
+
+.task-item:hover::before {
+  left: 100%;
+}
+
 .task-item:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--border-color-hover);
 }
 
-.task-item.pending {
-  border-left-color: #ffc107;
+/* Priority-based border colors */
+.task-item.priority-low {
+  border-left-color: var(--priority-low);
 }
 
+.task-item.priority-medium {
+  border-left-color: var(--priority-medium);
+}
+
+.task-item.priority-high {
+  border-left-color: var(--priority-high);
+}
+
+/* Status-based styling */
 .task-item.completed {
-  border-left-color: #28a745;
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
+  opacity: 0.8;
 }
 
 .task-item.completed .task-title {
@@ -41,6 +70,22 @@
 
 .task-item.completed .task-description {
   opacity: 0.6;
+}
+
+/* Due date status styling */
+.task-item.overdue {
+  border-color: var(--status-overdue);
+  background: rgba(220, 38, 38, 0.05);
+}
+
+.task-item.today {
+  border-color: var(--status-today);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.task-item.tomorrow {
+  border-color: var(--status-tomorrow);
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .task-content {
@@ -79,10 +124,10 @@
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 4px;
-  background: white;
-  transition: all 0.2s ease;
+  background: var(--input-bg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
@@ -93,24 +138,26 @@
   top: 2px;
   width: 6px;
   height: 10px;
-  border: solid white;
+  border: solid var(--text-inverse);
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: rotate(45deg) scale(0);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .task-checkbox input[type="checkbox"]:checked + .checkbox-label .checkmark {
-  background: #28a745;
-  border-color: #28a745;
+  background: var(--success-color);
+  border-color: var(--success-color);
+  transform: scale(1.1);
 }
 
 .task-checkbox input[type="checkbox"]:checked + .checkbox-label .checkmark::after {
   opacity: 1;
+  transform: rotate(45deg) scale(1);
 }
 
 .task-checkbox input[type="checkbox"]:focus + .checkbox-label .checkmark {
-  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+  box-shadow: 0 0 0 3px var(--primary-color-alpha);
 }
 
 .task-info {
@@ -118,27 +165,130 @@
   min-width: 0;
 }
 
+.task-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .task-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 0.5rem;
+  color: var(--text-primary);
   line-height: 1.4;
   word-wrap: break-word;
+  flex: 1;
+}
+
+.task-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.priority-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.priority-badge.priority-low {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--priority-low);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.priority-badge.priority-medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--priority-medium);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.priority-badge.priority-high {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--priority-high);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.category-badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .task-description {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 0.75rem;
   word-wrap: break-word;
 }
 
+.task-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .task-date {
   font-size: 0.8rem;
-  color: #999;
+  color: var(--text-muted);
   font-style: italic;
+}
+
+.due-date {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.due-date.due-overdue {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--status-overdue);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.due-date.due-today {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--status-today);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.due-date.due-tomorrow {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--status-tomorrow);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.due-date.due-soon {
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--status-soon);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.due-date.due-future {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--status-future);
+  border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
 .task-actions {
@@ -153,20 +303,21 @@
   font-size: 0.85rem;
   border-radius: 6px;
   min-width: auto;
+  transition: all 0.2s ease;
 }
 
 .task-actions .btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.05);
 }
 
 /* Delete confirmation */
 .delete-confirmation {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
-  animation: slideDown 0.2s ease-out;
+  animation: slideDown 0.3s ease-out;
 }
 
 @keyframes slideDown {
@@ -181,7 +332,7 @@
 }
 
 .delete-confirmation p {
-  color: #856404;
+  color: var(--warning-color);
   font-weight: 500;
   margin-bottom: 0.75rem;
 }
@@ -206,12 +357,28 @@
     gap: 0.75rem;
   }
   
+  .task-title-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .task-badges {
+    align-self: flex-start;
+  }
+  
   .task-title {
     font-size: 1rem;
   }
   
   .task-description {
     font-size: 0.9rem;
+  }
+  
+  .task-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
   
   .task-actions {
@@ -248,33 +415,34 @@
     justify-content: flex-end;
     margin-top: 0.75rem;
   }
+  
+  .task-badges {
+    gap: 0.3rem;
+  }
+  
+  .priority-badge,
+  .category-badge,
+  .due-date {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+  }
 }
 
-/* Status indicators */
-.task-item.pending::before {
-  content: "⏳";
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 0.8rem;
-  opacity: 0.5;
+/* Accessibility improvements */
+.task-checkbox input[type="checkbox"]:focus + .checkbox-label .checkmark {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
-.task-item.completed::before {
-  content: "✅";
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-.task-item {
-  position: relative;
-}
-
-@media (max-width: 480px) {
-  .task-item::before {
+/* Print styles */
+@media print {
+  .task-actions {
     display: none;
+  }
+  
+  .task-item {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
   }
 }

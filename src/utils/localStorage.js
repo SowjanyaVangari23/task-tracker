@@ -33,3 +33,6 @@ export const removeUsername = () => removeStoredData('taskTracker_username');
 
 export const getTasks = () => getStoredData('taskTracker_tasks', []);
 export const setTasks = (tasks) => setStoredData('taskTracker_tasks', tasks);
+
+export const getDarkMode = () => getStoredData('taskTracker_darkMode', false);
+export const setDarkMode = (darkMode) => setStoredData('taskTracker_darkMode', darkMode);
