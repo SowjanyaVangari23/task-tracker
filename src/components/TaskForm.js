@@ -76,6 +76,7 @@ const TaskForm = ({ onAddTask, editingTask, onUpdateTask, onCancelEdit }) => {
             maxLength="100"
           />
           {error && <span className="error-message">{error}</span>}
+          }
         </div>
         
         <div className="form-group">
