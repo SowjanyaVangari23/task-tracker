@@ -31,6 +31,7 @@ A modern, responsive task management application built with React.js that helps 
 ![Login Screen - Desktop](public/LoginLight.png)
 ![Task Dashboard - Desktop](public/TaskDashboardLight.png)
 ![Task List - Desktop](public/TaskListLight.png)
+![Task Dashboard Dark - Desktop](public/TaskDashboardDark.png)
 
 ### Mobile View
 ![Login Screen - Mobile](public/LoginMobile.jpg)
